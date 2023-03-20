@@ -1,14 +1,16 @@
 package com.personalproject.todomanagement.model
 
 import jakarta.persistence.*
+import lombok.Data
 
+@Data
 @Entity
-@Table(name = "like")
+@Table(name = "likes")
 data class Like (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "id_comment")
         val comment: Comment,
         @ManyToOne

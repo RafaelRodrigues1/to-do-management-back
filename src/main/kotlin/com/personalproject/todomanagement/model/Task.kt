@@ -1,14 +1,15 @@
 package com.personalproject.todomanagement.model
 
 import jakarta.persistence.*
+import lombok.Data
 import java.util.*
 
+@Data
 @Entity
 @Table(name = "task")
 data class Task (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id")
         val id: Long,
         @Column(name = "title")
         val title: String,
@@ -20,7 +21,7 @@ data class Task (
         val alterationDate: Date,
         @OneToMany(mappedBy = "task")
         val comments: List<Comment>,
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "id_project")
         val project: Project,
         @ManyToOne

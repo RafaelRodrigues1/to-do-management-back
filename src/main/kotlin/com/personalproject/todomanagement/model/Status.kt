@@ -1,8 +1,10 @@
 package com.personalproject.todomanagement.model
 
 import jakarta.persistence.*
+import lombok.Data
 import java.util.*
 
+@Data
 @Entity
 @Table(name = "status")
 data class Status (

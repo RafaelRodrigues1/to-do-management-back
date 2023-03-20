@@ -1,10 +1,12 @@
 package com.personalproject.todomanagement.model
 
 import jakarta.persistence.*
+import lombok.Data
 import java.util.Date
 
+@Data
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 data class User (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,17 +18,5 @@ data class User (
         @Column(name = "email")
         val email: String,
         @Column(name = "dt_register")
-        val registerDate: Date,
-        @OneToMany(mappedBy = "user")
-        val likes: List<Like>,
-        @OneToMany(mappedBy = "user")
-        val comments: List<Comment>,
-        @OneToMany(mappedBy = "registerUser")
-        val projects: List<Project>,
-        @OneToMany(mappedBy = "registerUser")
-        val status: List<Status>,
-        @OneToMany(mappedBy = "registerUser")
-        val registeredTasks: List<Task>,
-        @OneToMany(mappedBy = "responsible")
-        val responsibleTasks: List<Task>
+        val registerDate: Date
 )
