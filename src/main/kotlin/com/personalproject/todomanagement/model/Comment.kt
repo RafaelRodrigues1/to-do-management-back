@@ -11,7 +11,7 @@ data class Comment (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
-        @Column(name = "description")
+        @Column(name = "description", nullable = false)
         val description: String,
         @Column(name = "dt_register")
         val registerDate: Date,

@@ -11,16 +11,16 @@ data class Task (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
-        @Column(name = "title")
+        @Column(name = "title", nullable = false)
         val title: String,
-        @Column(name = "description")
+        @Column(name = "description", nullable = false)
         val description: String,
         @Column(name = "dt_register")
-        val registerDate: Date,
+        var registerDate: Date?,
         @Column(name = "dt_alteration")
-        val alterationDate: Date,
+        var alterationDate: Date?,
         @OneToMany(mappedBy = "task")
-        val comments: List<Comment>,
+        val comments: List<Comment>?,
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "id_project")
         val project: Project,
@@ -29,7 +29,7 @@ data class Task (
         val status: Status,
         @ManyToOne
         @JoinColumn(name = "register_user")
-        val registerUser: User,
+        val registerUser: User?,
         @ManyToOne
         @JoinColumn(name = "responsible_user")
         val responsible: User
