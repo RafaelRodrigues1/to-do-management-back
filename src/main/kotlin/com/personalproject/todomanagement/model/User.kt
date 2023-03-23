@@ -12,11 +12,11 @@ data class User (
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
         @Column(name = "name")
-        val name: String,
+        val name: String?,
         @Column(name = "matriculation")
-        val matriculation: String,
+        val matriculation: String?,
         @Column(name = "email")
-        val email: String,
+        val email: String?,
         @Column(name = "dt_register")
-        val registerDate: Date
+        val registerDate: Date?
 )

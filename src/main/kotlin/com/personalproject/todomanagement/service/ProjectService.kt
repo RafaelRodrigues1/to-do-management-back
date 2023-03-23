@@ -24,4 +24,9 @@ class ProjectService {
         }
         return projectRepository.save(project)
     }
+
+    fun updateProject(project: Project): Project {
+        project.alterationDate = Date()
+        return projectRepository.save(project)
+    }
 }

@@ -16,12 +16,12 @@ data class Project (
         @Column(name = "description", nullable = false)
         val description: String,
         @OneToMany(mappedBy = "project", cascade = [CascadeType.REMOVE])
-        val tasks: List<Task>,
-        @Column(name = "dt_register", nullable = false)
+        val tasks: List<Task>?,
+        @Column(name = "dt_register")
         var registerDate: Date?,
         @Column(name = "dt_alteration")
         var alterationDate: Date?,
         @ManyToOne
         @JoinColumn(name = "register_user", nullable = false)
-        val registerUser: User?
+        val registerUser: User
 )
