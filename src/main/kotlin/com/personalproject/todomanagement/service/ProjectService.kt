@@ -26,8 +26,7 @@ class ProjectService {
     }
 
     fun updateProject(project: Project): Project {
-        project.alterationDate = Date()
-        val projectId = projectRepository.updateProject(project.name, project.description, project.responsible.id, project.id).toLong()
+        val projectId = projectRepository.updateProject(project.name, project.description, project.responsible.id, Date(), project.id).toLong()
         return findProjectById(projectId)
     }
 }
