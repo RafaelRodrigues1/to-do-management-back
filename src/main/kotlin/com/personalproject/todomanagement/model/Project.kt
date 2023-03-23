@@ -23,5 +23,8 @@ data class Project (
         var alterationDate: Date?,
         @ManyToOne
         @JoinColumn(name = "register_user", nullable = false)
-        val registerUser: User
+        val registerUser: User,
+        @ManyToOne
+        @JoinColumn(name = "responsible_user", nullable = false)
+        val responsible: User
 )
