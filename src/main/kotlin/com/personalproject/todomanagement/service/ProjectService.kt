@@ -19,14 +19,17 @@ class ProjectService {
     fun findProjectById(id: Long): Project = projectRepository.findById(id).orElseThrow{ NotFoundException() }
 
     fun saveProject(project: Project): Project {
+        if(project.registerUser == null) {
+            throw IllegalArgumentException()
+        }
         if(project.registerDate == null) {
             project.registerDate = Date()
         }
         return projectRepository.save(project)
     }
 
-    fun updateProject(project: Project): Project {
-        val projectId = projectRepository.updateProject(project.name, project.description, project.responsible.id, Date(), project.id).toLong()
-        return findProjectById(projectId)
+    fun updateProject(project: Project): Project? {
+        val projectId = project.responsible?.let { projectRepository.updateProject(project.name, project.description, it.id, Date(), project.id).toLong() }
+        return projectId?.let { findProjectById(it) }
     }
 }

@@ -28,5 +28,5 @@ class ProjectController {
     fun saveProject(@RequestBody project: Project): Project = projectService.saveProject(project)
 
     @PutMapping
-    fun updateProject(@RequestBody project: Project): Project = projectService.updateProject(project)
+    fun updateProject(@RequestBody project: Project): Project? = projectService.updateProject(project)
 }

@@ -16,6 +16,9 @@ interface StatusRepository: JpaRepository<Status, Long> {
     @Modifying
     @Query(value = "UPDATE status s SET s.name = :name, s.description = :description, " +
             "s.dt_alteration = :dataAlteration WHERE s.id = :id", nativeQuery = true)
-    fun updateStatus(@Param("name") name: String, @Param("description") description: String,
+    fun updateStatus(@Param("name") name: String?, @Param("description") description: String?,
                      @Param("dataAlteration") dataAlteration: Date, @Param("id") id: Long): Integer
+
+    @Query(value = "SELECT s.* FROM status s LEFT JOIN task t ON t.id_status = s.id WHERE t.id = :taskId", nativeQuery = true)
+    fun findByTaskId(@Param("taskId") taskId: Long): Status
 }
