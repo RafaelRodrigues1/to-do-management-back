@@ -1,5 +1,6 @@
 package com.personalproject.todomanagement.model
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 import lombok.Data
 import java.util.*
@@ -12,9 +13,10 @@ data class Project (
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
         @Column(name = "name", nullable = false)
-        val name: String,
+        val name: String?,
         @Column(name = "description", nullable = false)
-        val description: String,
+        val description: String?,
+        @JsonBackReference(value="project-tasks")
         @OneToMany(mappedBy = "project", cascade = [CascadeType.REMOVE])
         val tasks: List<Task>?,
         @Column(name = "dt_register")
@@ -26,5 +28,5 @@ data class Project (
         val registerUser: User?,
         @ManyToOne
         @JoinColumn(name = "responsible_user", nullable = false)
-        val responsible: User
+        val responsible: User?
 )
