@@ -22,7 +22,7 @@ interface TaskRepository: JpaRepository<Task, Long> {
     @Query(value = "UPDATE task t SET t.title = :title, t.description = :description, " +
             "t.responsible_user = :responsibleId, t.dt_alteration = :dataAlteration WHERE t.id = :id", nativeQuery = true)
     fun updateTask(@Param("title") title: String?, @Param("description") description: String?,
-                      @Param("responsibleId") responsibleId: Long, @Param("dataAlteration") dataAlteration: Date,
+                      @Param("responsibleId") responsibleId: UUID?, @Param("dataAlteration") dataAlteration: Date,
                       @Param("id") id: Long): Integer
 
     @Modifying
