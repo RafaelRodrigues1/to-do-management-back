@@ -1,6 +1,6 @@
 package com.personalproject.todomanagement.model
 
-import jakarta.persistence.*
+import javax.persistence.*
 import lombok.Data
 import java.util.Date
 

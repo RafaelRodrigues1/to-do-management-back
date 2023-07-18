@@ -1,22 +1,35 @@
 package com.personalproject.todomanagement.model
 
-import jakarta.persistence.*
+import com.fasterxml.jackson.annotation.JsonIgnore
+import javax.persistence.*
 import lombok.Data
+import org.hibernate.annotations.Type
+import org.jetbrains.annotations.NotNull
 import java.util.Date
+import java.util.UUID
 
 @Data
 @Entity
 @Table(name = "users")
-data class User (
+data class User(
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long,
+        @Type(type = "uuid-char")
+        var id: UUID? = null,
         @Column(name = "name")
         val name: String?,
-        @Column(name = "matriculation")
-        val matriculation: String?,
-        @Column(name = "email")
+        @Column(name = "registration", unique = true)
+        val registration: String?,
+        @Column(name = "email", unique = true)
         val email: String?,
+        @Column(name = "senha")
+        @JsonIgnore
+        val senha: String?,
         @Column(name = "dt_register")
-        val registerDate: Date?
+        val registerDate: Date?,
+        @Enumerated(EnumType.STRING)
+        val status: UserStatus
 )
+
+enum class UserStatus {
+        ATIVO, INATIVO, PENDENTE;
+}
