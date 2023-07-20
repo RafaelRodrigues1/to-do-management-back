@@ -11,7 +11,7 @@ import java.util.UUID
 @Data
 @Entity
 @Table(name = "users")
-data class User(
+data class User (
         @Id
         @Type(type = "uuid-char")
         var id: UUID? = null,
@@ -31,5 +31,5 @@ data class User(
 )
 
 enum class UserStatus {
-        ATIVO, INATIVO, PENDENTE;
+        ATIVO, INATIVO, PENDENTE, PROCESSANDO;
 }
