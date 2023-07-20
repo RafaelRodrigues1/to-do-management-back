@@ -8,6 +8,7 @@ import com.personalproject.todomanagement.repository.UserRepository
 import com.personalproject.todomanagement.utils.EncryptUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.UUID
 
 @Service
 class UserService {
@@ -26,8 +27,13 @@ class UserService {
 
     fun login(userLogin: UserLoginDTO): User {
         val listUsers: List<User> = userRepository.findByEmail(userLogin.email)
-        val user: User = if(listUsers.isNotEmpty()) listUsers.get(0) else throw Exception("Email não cadastrado")
+        val user: User = if(listUsers.isNotEmpty()) listUsers[0] else throw Exception("Email não cadastrado")
         return if(EncryptUtil.compareHashMd5(userLogin.senha, user.senha!!)) user else throw Exception("Senha incorreta")
+    }
+
+    fun confirmaCadastro(id: UUID) {
+        //ENVIAR PARA FILA DE EMAIL DE CONFIRMAÇÃO
+        userRepository.confirmaCadastro(id)
     }
 
 }
