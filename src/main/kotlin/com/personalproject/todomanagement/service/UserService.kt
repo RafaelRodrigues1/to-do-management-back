@@ -8,7 +8,6 @@ import com.personalproject.todomanagement.repository.UserRepository
 import com.personalproject.todomanagement.utils.EncryptUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.UUID
 
 @Service
 class UserService {
@@ -31,9 +30,13 @@ class UserService {
         return if(EncryptUtil.compareHashMd5(userLogin.senha, user.senha!!)) user else throw Exception("Senha incorreta")
     }
 
-    fun confirmaCadastro(id: UUID) {
+    fun confirmaCadastro(registration: String): User? {
         //ENVIAR PARA FILA DE EMAIL DE CONFIRMAÇÃO
-        userRepository.confirmaCadastro(id)
+        val user: User? = userRepository.verifyUserProcessingStatusByRegistration(registration)
+        return user?.let {
+            userRepository.confirmaCadastro(it.id!!)
+            return it
+        } ?: throw Exception("Usuário com cadastro já finalizado")
     }
 
 }

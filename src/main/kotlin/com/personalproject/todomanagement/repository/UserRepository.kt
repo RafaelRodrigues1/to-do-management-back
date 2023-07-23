@@ -12,6 +12,9 @@ interface UserRepository : JpaRepository<User, UUID> {
 
     fun findByEmail(email: String): List<User>
 
+    @Query("SELECT u FROM User u WHERE u.status = 'PROCESSANDO' AND u.registration = :registration")
+    fun verifyUserProcessingStatusByRegistration(@Param("registration") registration: String): User?
+
     @Transactional
     @Modifying
     @Query("UPDATE User u SET u.status = 'ATIVO' WHERE u.id = :id")
